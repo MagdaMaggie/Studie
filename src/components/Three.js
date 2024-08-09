@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
-// import { HDRCubeTextureLoader } from "three/examples/jsm/loaders/HDRCubeTextureLoader.js";
 import { PMREMGenerator } from "three/src/extras/PMREMGenerator.js";
 import { gsap } from "gsap";
+import Background from "../assets/environment.hdr";
 
 function MyThree() {
   const canvasRef = useRef(null);
@@ -55,7 +55,7 @@ function MyThree() {
     scene.add(directionalLight);
 
     const loadModel = () => {
-      const fraesenUrl = new URL("../assets/7.glb", import.meta.url).href;
+      const fraesenUrl = new URL("../assets/21.glb", import.meta.url).href;
       const gLTFLoader = new GLTFLoader();
       gLTFLoader.load(
         fraesenUrl,
@@ -65,22 +65,16 @@ function MyThree() {
           model.rotation.set(Math.PI * 0.1, Math.PI * 1.2, 0);
           model.scale.set(1, 1, 1);
 
-          model.traverse((child) => {
-            if (child.isMesh && child.material.map) {
-              // child.material.map.encoding = THREE.sRGBEncoding;
-            }
-          });
-
           scene.add(model);
           modelRef.current = model;
 
           const mixer = new THREE.AnimationMixer(model);
           mixerRef.current = mixer;
 
-          gltf.animations.forEach((clip) => {
-            const action = mixer.clipAction(clip);
-            action.play();
-          });
+          // gltf.animations.forEach((clip) => {
+          //   const action = mixer.clipAction(clip);
+          //   action.play();
+          // });
         },
         undefined,
         (error) => console.error("An error happened while loading the model", error)
@@ -88,36 +82,14 @@ function MyThree() {
     };
 
     const loadHDR = () => {
-      // const hdrUrls = [
-      //   "px.jpg", "nx.jpg", "py.jpg", "ny.jpg", "pz.jpg", "nz.jpg",
-      // ];
       const pmremGenerator = new PMREMGenerator(renderer);
       pmremGenerator.compileCubemapShader();
 
-      new RGBELoader().load('../assets/environment.hdr', (texture)=> {
+      new RGBELoader().load(Background, (texture)=> {
         texture.mapping=THREE.EquirectangularReflectionMapping;
         scene.background=texture;
         scene.environment=texture;
-        })
-
-      // Wirft ein Fehler, weil die Dateien nicht gefunden werden
-      // new HDRCubeTextureLoader()
-      //   .setPath("../assets/CubeHdr/")
-      //   .load(
-      //     hdrUrls,
-      //     (hdrCubeMap) => {
-      //       const hdrCubeRenderTarget = pmremGenerator.fromCubemap(hdrCubeMap);
-      //       hdrCubeMap.magFilter = THREE.LinearFilter;
-      //       hdrCubeMap.needsUpdate = true;
-
-      //       scene.background = hdrCubeRenderTarget.texture;
-      //       scene.environment = hdrCubeRenderTarget.texture;
-      //       console.log("pmremGenerator", hdrCubeMap);
-      //     },
-      //     undefined,
-      //     (error) => console.error("An error happened while loading the HDR textures", error)
-      //   );
-      
+        })      
     };
 
     const animate = () => {
