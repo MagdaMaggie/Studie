@@ -13,6 +13,7 @@ function MyThree() {
   const cameraRef = useRef(null);
   const modelRef = useRef(null);
   const mixerRef = useRef(null);
+  const actionsRef = useRef({});
 
   // Three js logic after the component mounts
   useEffect(() => {
@@ -55,7 +56,7 @@ function MyThree() {
     scene.add(directionalLight);
 
     const loadModel = () => {
-      const fraesenUrl = new URL("../assets/21.glb", import.meta.url).href;
+      const fraesenUrl = new URL("../assets/25.glb", import.meta.url).href;
       const gLTFLoader = new GLTFLoader();
       gLTFLoader.load(
         fraesenUrl,
@@ -71,10 +72,12 @@ function MyThree() {
           const mixer = new THREE.AnimationMixer(model);
           mixerRef.current = mixer;
 
-          // gltf.animations.forEach((clip) => {
-          //   const action = mixer.clipAction(clip);
-          //   action.play();
-          // });
+          mixerRef.current.timeScale = 0.5;
+
+          gltf.animations.forEach((clip) => {
+            const action = mixer.clipAction(clip);
+            actionsRef.current[clip.name] = action;
+          });
         },
         undefined,
         (error) => console.error("An error happened while loading the model", error)
@@ -94,12 +97,9 @@ function MyThree() {
 
     const animate = () => {
       const clock = new THREE.Clock();
-      let lastElapsedTime = 0;
 
       const tick = () => {
-        const elapsedTime = clock.getElapsedTime();
-        const deltaTime = elapsedTime - lastElapsedTime;
-        lastElapsedTime = elapsedTime;
+        const deltaTime = clock.getDelta();
 
         if (mixerRef.current) {
           mixerRef.current.update(deltaTime);
@@ -153,6 +153,90 @@ function MyThree() {
               duration: 1.25,
               ease: "power2.inOut",
               x: transformModel[currentSection].positionX,
+            });
+
+          if (currentSection === 1) {
+              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "Werkzeughaltervorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+                if (actionsRef.current[animation]) {
+                  actionsRef.current[animation].reset().play();
+                }
+              });
+            } else {
+              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "Werkzeughaltervorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+                if (actionsRef.current[animation]) {
+                  actionsRef.current[animation].stop();
+                }
+              });
+            }
+          }
+
+          if (currentSection === 2) {
+            ["Abdeckung1", "Button1", "KetteBruecke1", "KetteSeite1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].reset().play();
+              }
+            });
+          } else {
+            ["Abdeckung1", "Button1", "KetteBruecke1", "KetteSeite1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].stop();
+              }
+            });
+          }
+
+          if (currentSection === 3) {
+            ["Abdeckung2", "Schraube2", "Schrauben2"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].reset().play();
+              }
+            });
+          } else {
+            ["Abdeckung2", "Schraube2", "Schrauben2"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].stop();
+              }
+            });
+          }
+
+          if (currentSection === 4) {
+            ["Werkzeughalter3"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].reset().play();
+              }
+            });
+          } else {
+            ["Werkzeughalter3"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].stop();
+              }
+            });
+          }
+
+          if (currentSection === 5) {
+            ["camera4"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].reset().play();
+              }
+            });
+          } else {
+            ["camera4"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].stop();
+              }
+            });
+          }
+
+          if (currentSection === 6) {
+            ["Abdeckung5", "Schraube5", "Schrauben5"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].reset().play();
+              }
+            });
+          } else {
+            ["Abdeckung5", "Schraube5", "Schrauben5"].forEach(animation => {
+              if (actionsRef.current[animation]) {
+                actionsRef.current[animation].stop();
+              }
             });
           }
         }

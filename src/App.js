@@ -12,8 +12,7 @@ function App() {
             <h2>Wartungsanleitung einer High-Z S-1000 T CNC Fräsmaschine</h2>
             <p>
                 Im Folgenden werden die einzelnen Schritte der Wartung beschrieben. <br />
-                Die Abkürzung CNC steht für „Computerized Numerical Control" <br />
-                (CNC-Fräsen: Grundlagen und Beispiele von Horst-Christian Heinkle)
+                Die Abkürzung CNC steht für „Computerized Numerical Control"
             </p>
           </div>
         </div>
