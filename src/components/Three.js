@@ -72,7 +72,7 @@ function MyThree() {
           const mixer = new THREE.AnimationMixer(model);
           mixerRef.current = mixer;
 
-          mixerRef.current.timeScale = 0.5;
+          mixerRef.current.timeScale = 0.3; //Animationsgeschwindigkeit
 
           gltf.animations.forEach((clip) => {
             const action = mixer.clipAction(clip);
@@ -125,14 +125,14 @@ function MyThree() {
 
     const handleScroll = () => {
       const transformModel = [
-        { rotationZ: 0, positionX: 2.5 },
-        { rotationZ: 0, positionX: -1.3 },
-        { rotationZ: 0, positionX: 2.5 },
-        { rotationZ: 0, positionX: -1.3 },
-        { rotationZ: 0, positionX: 2.5 },
-        { rotationZ: 0, positionX: -1.3 },
-        { rotationZ: 0, positionX: 2.5 },
-        { rotationZ: 0, positionX: 0 },
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0}, //Start
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: -0.5, positionY: -0.5, positionZ: 0}, //Vorbereitung
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.8, rotationZ: 0, positionX: 2.5, positionY: 0, positionZ: -1.5}, //Schritt 1
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 0, positionY: -0.5, positionZ: -1.5}, //Schritt 2
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0}, //Schritt 3
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.5, rotationZ: 0, positionX: 0.75, positionY: -0.5, positionZ: -0.5},  //Schritt 4
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0},  //Schritt 5
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 1, positionY: -1, positionZ: 0}, //Ende
       ];
 
       let currentSection = 0;
@@ -145,24 +145,28 @@ function MyThree() {
 
           if (modelRef.current && transformModel[currentSection]) {
             gsap.to(modelRef.current.rotation, {
-              duration: 1.25,
-              ease: "power2.inOut",
-              z: transformModel[currentSection].rotationZ,
+              duration: 0.75,
+              ease: "power2.out",
+              x: transformModel[currentSection].rotationX, 
+              y: transformModel[currentSection].rotationY, 
+              z: transformModel[currentSection].rotationZ, 
             });
             gsap.to(modelRef.current.position, {
-              duration: 1.25,
-              ease: "power2.inOut",
+              duration: 0.75,
+              ease: "power2.out",
               x: transformModel[currentSection].positionX,
+              y: transformModel[currentSection].positionY,
+              z: transformModel[currentSection].positionZ,
             });
 
           if (currentSection === 1) {
-              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "Werkzeughaltervorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
                 if (actionsRef.current[animation]) {
                   actionsRef.current[animation].reset().play();
                 }
               });
             } else {
-              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "Werkzeughaltervorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
                 if (actionsRef.current[animation]) {
                   actionsRef.current[animation].stop();
                 }
