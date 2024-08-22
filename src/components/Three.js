@@ -34,6 +34,8 @@ function MyThree() {
       1000
     );
     camera.position.z = 5;
+    camera.position.y = 0;
+    camera.position.x = 0;
     scene.add(camera);
     cameraRef.current = camera;
 
@@ -131,7 +133,7 @@ function MyThree() {
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 0, positionY: -0.5, positionZ: -1.5}, //Schritt 2
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0}, //Schritt 3
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.5, rotationZ: 0, positionX: 0.75, positionY: -0.5, positionZ: -0.5},  //Schritt 4
-        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0},  //Schritt 5
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: -1.5},  //Schritt 5
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 1, positionY: -1, positionZ: 0}, //Ende
       ];
 
@@ -217,16 +219,20 @@ function MyThree() {
           }
 
           if (currentSection === 5) {
-            ["camera4"].forEach(animation => {
-              if (actionsRef.current[animation]) {
-                actionsRef.current[animation].reset().play();
-              }
+            gsap.to(cameraRef.current.position, {
+              duration: 1.25,
+              ease: "power2.inOut",
+              z: 0.25, //ran-/rauszoomen
+              y: 0.8, //hoch-runter
+              x: -0.45, //rechts-links
             });
           } else {
-            ["camera4"].forEach(animation => {
-              if (actionsRef.current[animation]) {
-                actionsRef.current[animation].stop();
-              }
+            gsap.to(cameraRef.current.position, {
+              duration: 1.25,
+              ease: "power2.inOut",
+              z: 5, 
+              y: 0,
+              x: 0,
             });
           }
 
