@@ -61,7 +61,7 @@ function MyThree() {
     scene.add(directionalLight);
 
     const loadModel = () => {
-      const fraesenUrl = new URL("../assets/25.glb", import.meta.url).href;
+      const fraesenUrl = new URL("../assets/27.glb", import.meta.url).href;
       const gLTFLoader = new GLTFLoader();
       gLTFLoader.load(
         fraesenUrl,
