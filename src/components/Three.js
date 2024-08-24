@@ -3,6 +3,9 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { PMREMGenerator } from "three/src/extras/PMREMGenerator.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import helvetikerFontJson from 'three/examples/fonts/helvetiker_regular.typeface.json'; 
 import { gsap } from "gsap";
 import Background from "../assets/environment.hdr";
 
@@ -14,8 +17,8 @@ function MyThree() {
   const modelRef = useRef(null);
   const mixerRef = useRef(null);
   const actionsRef = useRef({});
+  const linesAndLabelsRef = useRef([]);
 
-  // Three js logic after the component mounts
   useEffect(() => {
     if (!canvasRef.current) return;
 
@@ -80,6 +83,8 @@ function MyThree() {
             const action = mixer.clipAction(clip);
             actionsRef.current[clip.name] = action;
           });
+
+          addLinesAndLabels();
         },
         undefined,
         (error) => console.error("An error happened while loading the model", error)
@@ -96,6 +101,78 @@ function MyThree() {
         scene.environment=texture;
         })      
     };
+
+    const createLine = (start, end, color = 0xffffff) => {
+      const material = new THREE.LineBasicMaterial({ color });
+      const points = [start, end];
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      return new THREE.Line(geometry, material);
+    };
+
+    const createLabel = (text, position, size = 0.2, color = 0xffffff) => {
+      const loader = new FontLoader();
+      const font = loader.parse(helvetikerFontJson);
+  
+        const geometry = new TextGeometry(text, {
+          font: font, // Ensure the font is loaded
+          size: size,
+          height: 0.05,
+        });
+        const material = new THREE.MeshBasicMaterial({ color });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.copy(position);
+        scene.add(mesh); // Add label to the scene
+        linesAndLabelsRef.current.push(mesh); // Store the label for later manipulation
+    };
+
+    const addLinesAndLabels = () => {
+      const model = modelRef.current;
+
+      if (!model) return;
+
+      // Example coordinates - adjust these to match your model's specific points
+      const yAxisStart = new THREE.Vector3(1.5, 0.9, 0);
+      const yAxisEnd = new THREE.Vector3(1.5, 0.4, 0);
+      const yAxisLine = createLine(yAxisStart, yAxisEnd);
+      scene.add(yAxisLine);
+      linesAndLabelsRef.current.push(yAxisLine);
+      createLabel("1", yAxisStart);
+
+      const zAxisStart = new THREE.Vector3(1.75, 1.25, 0);
+      const zAxisEnd = new THREE.Vector3(1.75, 0.75, 0);
+      const zAxisLine = createLine(zAxisStart, zAxisEnd);
+      scene.add(zAxisLine);
+      linesAndLabelsRef.current.push(zAxisLine);
+      createLabel("2", zAxisStart);
+
+      const xAxisStart = new THREE.Vector3(1.75, 0, 0);
+      const xAxisEnd = new THREE.Vector3(1.25, 0, 0);
+      const xAxisLine = createLine(xAxisStart, xAxisEnd);
+      scene.add(xAxisLine);
+      linesAndLabelsRef.current.push(xAxisLine);
+      createLabel("3", xAxisStart);
+
+      const coverStart = new THREE.Vector3(1.3, 1, 0);
+      const coverEnd = new THREE.Vector3(1.3, 0.5, 0);
+      const coverLine = createLine(coverStart, coverEnd);
+      scene.add(coverLine);
+      linesAndLabelsRef.current.push(coverLine);
+      createLabel("4", coverStart);
+
+      const ButtonStart = new THREE.Vector3(2.6, 0.2, 0);
+      const ButtonEnd = new THREE.Vector3(2.1, 0.2, 0);
+      const ButtonLine = createLine(ButtonStart, ButtonEnd);
+      scene.add(ButtonLine);
+      linesAndLabelsRef.current.push(ButtonLine);
+      createLabel("5", ButtonStart);
+    };
+
+      const toggleLinesAndLabels = (visible) => {
+        linesAndLabelsRef.current.forEach(obj => {
+          obj.visible = visible;
+      });
+    };
+
 
     const animate = () => {
       const clock = new THREE.Clock();
@@ -161,14 +238,21 @@ function MyThree() {
               z: transformModel[currentSection].positionZ,
             });
 
-          if (currentSection === 1) {
-              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+            if (currentSection === 0) {
+              toggleLinesAndLabels(true);
+            } 
+            else {
+              toggleLinesAndLabels(false);
+            }
+
+            if (currentSection === 1) {
+              ["ButtonVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
                 if (actionsRef.current[animation]) {
                   actionsRef.current[animation].reset().play();
                 }
               });
             } else {
-              ["ButtonVorbereitung", "KetteBrueckeVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
+              ["ButtonVorbereitung", "WerkzeughalterVorbereitung", "ZAchseVorbereitung"].forEach(animation => {
                 if (actionsRef.current[animation]) {
                   actionsRef.current[animation].stop();
                 }
@@ -177,13 +261,13 @@ function MyThree() {
           }
 
           if (currentSection === 2) {
-            ["Abdeckung1", "Button1", "KetteBruecke1", "KetteSeite1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1"].forEach(animation => {
+            ["Abdeckung1", "Button1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1", "Bruecke1"].forEach(animation => {
               if (actionsRef.current[animation]) {
                 actionsRef.current[animation].reset().play();
               }
             });
           } else {
-            ["Abdeckung1", "Button1", "KetteBruecke1", "KetteSeite1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1"].forEach(animation => {
+            ["Abdeckung1", "Button1", "Schraube1", "Schrauben1", "Werkzeughalter1", "ZAchse1", "Bruecke1"].forEach(animation => {
               if (actionsRef.current[animation]) {
                 actionsRef.current[animation].stop();
               }

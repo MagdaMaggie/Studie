@@ -12,7 +12,7 @@ function App() {
             <h2>Wartungsanleitung einer High-Z S-1000 T CNC Fräsmaschine</h2>
             <p>
                 Im Folgenden werden die einzelnen Schritte der Wartung beschrieben. <br />
-                Die Abkürzung CNC steht für „Computerized Numerical Control"
+                1: Y-Achse (Brücke), 2: Z-Achse, 3: X-Achse, 4: Abdeckung
             </p>
           </div>
         </div>
@@ -24,7 +24,7 @@ function App() {
             <h2>Vorbereitung</h2>
             <p>
               Als erstes ist es notwendig den Strom anzuschalten<br />
-              und die Brücke nach ganz links zu fahren.<br />
+              und die Z-Achse nach ganz links zu fahren.<br />
               Danach mit einem Pinsel alle Holzspähne entfernen<br />
               und Handschuhe, ein Putztuch sowie Fett bereitlegen.
             </p>
@@ -37,9 +37,9 @@ function App() {
           <div className="hero">
             <h2>1. Schritt</h2>
             <p>
-                Handschuhe anziehen und die Brücke in die Mitte fahren.<br />
-                Rechts und links von der Spindel der x-Achse etwas Fett geben<br />
-                und danach die Brücke nach links und rechts fahren.<br />
+                Handschuhe anziehen und die Y-Achse in die Mitte fahren.<br />
+                Rechts und links von der Spindel der X-Achse etwas Fett geben<br />
+                und danach die Y-Achse nach links und rechts fahren.<br />
                 Dadurch wird das alte Fett nach außen getrieben<br /> 
                 und kann anschließend mit einem Lappen abgetragen werden.<br />
                 Widerholen bis das ganze alte Fett abgetragen wurde.
@@ -54,10 +54,10 @@ function App() {
               <div className="hero">
                   <h2>2. Schritt</h2>
                   <p>
-                      Stirnseitig an der Maschine das Abdeckblech der Z-Achse entfernen.<br />
-                      Dazu die drei Schrauben mit einem Imbusschlüssel ziehen.<br />
+                      Stirnseitig an der Maschine das Abdeckblech der Y-Achse entfernen.<br />
+                      Dazu die zwei Schrauben mit einem Imbusschlüssel ziehen.<br />
                       Die Abdeckung nach oben herausnehmen.<br />
-                      Wartungsschritt 1 an der Z-Achse anwenden, <br />
+                      Wartungsschritt 1 an der Y-Achse anwenden, <br />
                       wie zuvor an der X-Achse.<br />                 
                   </p>
               </div>
@@ -70,7 +70,7 @@ function App() {
               <div className="hero">
                   <h2>3. Schritt</h2>
                   <p>
-                      Nun auf die andere Siete der Z-Achse wechseln.<br />
+                      Nun auf die andere Siete der Y-Achse wechseln.<br />
                       Dort die Antriebsspindel der Z-Achse vor und hinter<br />
                       der Umlaufmutter einfetten, mit dem selben Prinzip<br />
                       wie zuvor schon bei den anderen beiden Achsen.
@@ -101,7 +101,7 @@ function App() {
                   <h2>5. Schritt</h2>
                   <p>
                       Alle Spindeln mit neuem Fett einfetten.<br />
-                      Zum Schluss noch die Abdeckung der Z-Achse montieren.<br />
+                      Zum Schluss noch die Abdeckung der Y-Achse montieren.<br />
                       Dazu diese einfelden und verschrauben.<br />
                       Die Maschinen in all ihren Achsen verschieben, <br />
                       damit sich das Fett schön verteilt.
