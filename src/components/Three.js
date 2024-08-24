@@ -138,8 +138,8 @@ function MyThree() {
       linesAndLabelsRef.current.push(yAxisLine);
       createLabel("1", yAxisStart);
 
-      const zAxisStart = new THREE.Vector3(1.75, 1.25, 0);
-      const zAxisEnd = new THREE.Vector3(1.75, 0.75, 0);
+      const zAxisStart = new THREE.Vector3(2.25, 0.5, 0);
+      const zAxisEnd = new THREE.Vector3(1.75, 0.5, 0);
       const zAxisLine = createLine(zAxisStart, zAxisEnd);
       scene.add(zAxisLine);
       linesAndLabelsRef.current.push(zAxisLine);
@@ -165,6 +165,13 @@ function MyThree() {
       scene.add(ButtonLine);
       linesAndLabelsRef.current.push(ButtonLine);
       createLabel("5", ButtonStart);
+
+      const EngineMountStart = new THREE.Vector3(2.28, 0.93, 0);
+      const EngineMountEnd = new THREE.Vector3(1.78, 0.93, 0);
+      const EngineMountLine = createLine(EngineMountStart, EngineMountEnd);
+      scene.add(EngineMountLine);
+      linesAndLabelsRef.current.push(EngineMountLine);
+      createLabel("6", EngineMountStart);
     };
 
       const toggleLinesAndLabels = (visible) => {
@@ -208,7 +215,7 @@ function MyThree() {
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: -0.5, positionY: -0.5, positionZ: 0}, //Vorbereitung
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.8, rotationZ: 0, positionX: 2.5, positionY: 0, positionZ: -1.5}, //Schritt 1
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 0, positionY: -0.5, positionZ: -1.5}, //Schritt 2
-        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0}, //Schritt 3
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 2.3, rotationZ: 0, positionX: -0.5, positionY: 0, positionZ: -1.5}, //Schritt 3
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.5, rotationZ: 0, positionX: 0.75, positionY: -0.5, positionZ: -0.5},  //Schritt 4
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: -1.5},  //Schritt 5
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 1, positionY: -1, positionZ: 0}, //Ende

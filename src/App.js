@@ -9,10 +9,11 @@ function App() {
       <section className="one">
         <div className="container">
           <div className="hero">
-            <h2>Wartungsanleitung einer High-Z S-1000 T CNC Fräsmaschine</h2>
+            <h2>Wartungsanleitung einer <br />
+            High-Z S-1000 T CNC Fräsmaschine</h2>
             <p>
                 Im Folgenden werden die einzelnen Schritte der Wartung beschrieben. <br />
-                1: Y-Achse (Brücke), 2: Z-Achse, 3: X-Achse, 4: Abdeckung
+                1: Y-Achse (Brücke), 2: Z-Achse, 3: X-Achse, 4: Abdeckung, 5: Strom Button, 6: Motorlager
             </p>
           </div>
         </div>
@@ -87,7 +88,8 @@ function App() {
                   <p>
                       Als nächstes die Motorlager der Schrittmotore abschmieren.<br />
                       Dafür die Z-Achse nach ganz unten fahren,<br />
-                      dann ist der entsprechende Schmiernippel bereits zu sehen.<br />
+                      dann ist der entsprechende Schmiernippel <br />
+                      des Motorlagers bereits zu sehen. <br />
                       Mit einer Fettpresse diese Stelle einfetten.
                   </p>
               </div>
