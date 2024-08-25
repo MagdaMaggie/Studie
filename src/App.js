@@ -11,9 +11,9 @@ function App() {
           <div className="hero">
             <h2>Wartungsanleitung einer <br />
             High-Z S-1000 T CNC Fräsmaschine</h2>
-            <p>
-                Im Folgenden werden die einzelnen Schritte der Wartung beschrieben. <br />
-                1: Y-Achse (Brücke), 2: Z-Achse, 3: X-Achse, 4: Abdeckung, 5: Strom Button, 6: Motorlager
+            <p><br />
+                In dieser Abbildung sind alle für die Wartung relevanten Bauteile beschriftet. <br />
+                Basierend auf dieser Übersicht werden auf dieser Website die einzelnen Schritte der Wartung beschrieben. 
             </p>
           </div>
         </div>
@@ -23,11 +23,11 @@ function App() {
         <div className="container">
           <div className="hero">
             <h2>Vorbereitung</h2>
-            <p>
-              Als erstes ist es notwendig den Strom anzuschalten<br />
-              und die Z-Achse nach ganz links zu fahren.<br />
-              Danach mit einem Pinsel alle Holzspähne entfernen<br />
-              und Handschuhe, ein Putztuch sowie Fett bereitlegen.
+            <p><br />
+              Als erstes ist es notwendig den Not-Aus Schalter herauszuziehen, <br />
+              um den Strom anzuschalten und die Z-Achse nach ganz links zu fahren.<br />
+              Anschließend alle Holzspäne mit einem Pinsel entfernen und Handschuhe, <br />
+              ein Putztuch sowie eine Fettpresse bereitstellen.
             </p>
           </div>
         </div>
@@ -37,13 +37,15 @@ function App() {
         <div className="container">
           <div className="hero">
             <h2>1. Schritt</h2>
-            <p>
-                Handschuhe anziehen und die Y-Achse in die Mitte fahren.<br />
-                Rechts und links von der Spindel der X-Achse etwas Fett geben<br />
-                und danach die Y-Achse nach links und rechts fahren.<br />
+            <p><br />
+                Handschuhe anziehen und die Brücke, welche sich auf der <br />
+                Y-Achse befindet, in die Mitte fahren.<br />
+                Rechts und links von der Spindel der X-Achse das Fett <br />
+                mithilfe der Fettpresse hinzugeben und danach <br />
+                die Brücke nach links und rechts fahren.<br />                
                 Dadurch wird das alte Fett nach außen getrieben<br /> 
                 und kann anschließend mit einem Lappen abgetragen werden.<br />
-                Widerholen bis das ganze alte Fett abgetragen wurde.
+                Wiederholen bis das ganze alte Fett abgetragen wurde.
             </p>
           </div>
         </div>
@@ -54,12 +56,12 @@ function App() {
           <div className="container">
               <div className="hero">
                   <h2>2. Schritt</h2>
-                  <p>
-                      Stirnseitig an der Maschine das Abdeckblech der Y-Achse entfernen.<br />
-                      Dazu die zwei Schrauben mit einem Imbusschlüssel ziehen.<br />
+                  <p><br />
+                      Als nächstes an der Maschine das Abdeckblech der Brücke entfernen.<br />
+                      Dazu die zwei Schrauben mit einem Inbusschlüssel herausschrauben.<br />
                       Die Abdeckung nach oben herausnehmen.<br />
-                      Wartungsschritt 1 an der Y-Achse anwenden, <br />
-                      wie zuvor an der X-Achse.<br />                 
+                      Wartungsschritt 1 an der Spindel der Y-Achse anwenden, <br />
+                      wie zuvor an der Spindel der X-Achse.<br />                 
                   </p>
               </div>
           </div>
@@ -70,11 +72,10 @@ function App() {
           <div className="container">
               <div className="hero">
                   <h2>3. Schritt</h2>
-                  <p>
-                      Nun auf die andere Siete der Y-Achse wechseln.<br />
-                      Dort die Antriebsspindel der Z-Achse vor und hinter<br />
-                      der Umlaufmutter einfetten, mit dem selben Prinzip<br />
-                      wie zuvor schon bei den anderen beiden Achsen.
+                  <p><br />
+                      Nun auf die andere Seite der Fräse wechseln. <br />
+                      Dort die Spindel der Z-Achse einfetten,<br />
+                      mit dem selben Prinzip wie zuvor bei den anderen beiden Spindeln.
                   </p>
               </div>
           </div>
@@ -85,12 +86,9 @@ function App() {
           <div className="container">
               <div className="hero">
                   <h2>4. Schritt</h2>
-                  <p>
-                      Als nächstes die Motorlager der Schrittmotore abschmieren.<br />
-                      Dafür die Z-Achse nach ganz unten fahren,<br />
-                      dann ist der entsprechende Schmiernippel <br />
-                      des Motorlagers bereits zu sehen. <br />
-                      Mit einer Fettpresse diese Stelle einfetten.
+                  <p><br />
+                      Als nächstes die Motorlager der Schrittmotoren abschmieren.<br />                      
+                      Dazu den entsprechenden Schmiernippel mit einer Fettpresse einfetten.
                   </p>
               </div>
           </div>
@@ -101,12 +99,10 @@ function App() {
           <div className="container">
               <div className="hero">
                   <h2>5. Schritt</h2>
-                  <p>
-                      Alle Spindeln mit neuem Fett einfetten.<br />
-                      Zum Schluss noch die Abdeckung der Y-Achse montieren.<br />
-                      Dazu diese einfelden und verschrauben.<br />
-                      Die Maschinen in all ihren Achsen verschieben, <br />
-                      damit sich das Fett schön verteilt.
+                  <p><br />
+                      Alle von altem Fett befreiten Spindeln mit neuem Fett einfetten.<br />                      
+                      Die Maschine in all ihren Achsen verfahren, damit sich das Fett verteilt.<br />
+                      Zum Schluss noch die Abdeckung der Brücke montieren.
                   </p>
               </div>
           </div>
@@ -116,7 +112,7 @@ function App() {
       <section className="eight">
           <div className="container">
               <div className="hero">
-                  <h1>Ende</h1>
+                  <h1>Geschafft :)</h1>
               </div>
           </div>
       </section>

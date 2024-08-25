@@ -49,10 +49,14 @@ section .container{
 
 section.one .container{
     grid-template-areas: 'content ..';
+    padding-left: 15px;
+    padding-right: calc(100vw - 1360px - 15px);
 }
 
 section.two .container{
     grid-template-areas: '.. content';
+    padding-left: calc(100vw - 1360px - 15px);
+    padding-right: 15px;
 }
 
 section.three .container{
@@ -61,6 +65,8 @@ section.three .container{
 
 section.four .container{
     grid-template-areas: '.. content';
+    padding-left: calc(100vw - 1360px - 15px);
+    padding-right: 15px;
 }
 
 section.five .container{
@@ -69,6 +75,8 @@ section.five .container{
 
 section.six .container{
     grid-template-areas: '.. content';
+    padding-left: calc(100vw - 1360px - 15px);
+    padding-right: 15px;
 }
 
 section.seven .container{
@@ -93,8 +101,8 @@ section.eight .container{
 
 h1{
     position: absolute;
-    top:50%;
-    left:50%;
+    top:30%;
+    left:30%;
     transform: translate(-50%, -50%);
 
     font-size: 90px;

@@ -5,7 +5,7 @@ import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { PMREMGenerator } from "three/src/extras/PMREMGenerator.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import helvetikerFontJson from 'three/examples/fonts/helvetiker_regular.typeface.json'; 
+import helvetikerFontJson from 'three/examples/fonts/optimer_regular.typeface.json'; 
 import { gsap } from "gsap";
 import Background from "../assets/environment.hdr";
 
@@ -102,21 +102,21 @@ function MyThree() {
         })      
     };
 
-    const createLine = (start, end, color = 0xffffff) => {
+    const createLine = (start, end, color = 0x000000) => {
       const material = new THREE.LineBasicMaterial({ color });
       const points = [start, end];
       const geometry = new THREE.BufferGeometry().setFromPoints(points);
       return new THREE.Line(geometry, material);
     };
 
-    const createLabel = (text, position, size = 0.2, color = 0xffffff) => {
+    const createLabel = (text, position, size = 0.1, color = 0x000000) => {
       const loader = new FontLoader();
       const font = loader.parse(helvetikerFontJson);
   
         const geometry = new TextGeometry(text, {
           font: font, 
           size: size,
-          height: 0.05,
+          height: 0.015,
         });
         const material = new THREE.MeshBasicMaterial({ color });
         const mesh = new THREE.Mesh(geometry, material);
@@ -130,47 +130,47 @@ function MyThree() {
 
       if (!model) return;
 
-      const yAxisStart = new THREE.Vector3(1.5, 0.9, 0);
+      const yAxisStart = new THREE.Vector3(1.5, 1.2, 0);
       const yAxisEnd = new THREE.Vector3(1.5, 0.4, 0);
       const yAxisLine = createLine(yAxisStart, yAxisEnd);
       scene.add(yAxisLine);
       linesAndLabelsRef.current.push(yAxisLine);
-      createLabel("1", yAxisStart);
+      createLabel("Y-Achse (Brücke)", yAxisStart);
 
       const zAxisStart = new THREE.Vector3(2.25, 0.5, 0);
       const zAxisEnd = new THREE.Vector3(1.75, 0.5, 0);
       const zAxisLine = createLine(zAxisStart, zAxisEnd);
       scene.add(zAxisLine);
       linesAndLabelsRef.current.push(zAxisLine);
-      createLabel("2", zAxisStart);
+      createLabel("Z-Achse", zAxisStart);
 
-      const xAxisStart = new THREE.Vector3(1.75, 0, 0);
+      const xAxisStart = new THREE.Vector3(2.35, 0, 0);
       const xAxisEnd = new THREE.Vector3(1.25, 0, 0);
       const xAxisLine = createLine(xAxisStart, xAxisEnd);
       scene.add(xAxisLine);
       linesAndLabelsRef.current.push(xAxisLine);
-      createLabel("3", xAxisStart);
+      createLabel("X-Achse", xAxisStart);
 
-      const coverStart = new THREE.Vector3(1.3, 1, 0);
-      const coverEnd = new THREE.Vector3(1.3, 0.5, 0);
+      const coverStart = new THREE.Vector3(1.1, 1.35, 0);
+      const coverEnd = new THREE.Vector3(1.1, 0.55, 0);
       const coverLine = createLine(coverStart, coverEnd);
       scene.add(coverLine);
       linesAndLabelsRef.current.push(coverLine);
-      createLabel("4", coverStart);
+      createLabel("Abdeckung", coverStart);
 
       const ButtonStart = new THREE.Vector3(2.6, 0.2, 0);
       const ButtonEnd = new THREE.Vector3(2.1, 0.2, 0);
       const ButtonLine = createLine(ButtonStart, ButtonEnd);
       scene.add(ButtonLine);
       linesAndLabelsRef.current.push(ButtonLine);
-      createLabel("5", ButtonStart);
+      createLabel("Not-Aus", ButtonStart);
 
       const EngineMountStart = new THREE.Vector3(2.28, 0.93, 0);
       const EngineMountEnd = new THREE.Vector3(1.78, 0.93, 0);
       const EngineMountLine = createLine(EngineMountStart, EngineMountEnd);
       scene.add(EngineMountLine);
       linesAndLabelsRef.current.push(EngineMountLine);
-      createLabel("6", EngineMountStart);
+      createLabel("Schmiernippel \n (Motorlager)", EngineMountStart);
     };
 
       const toggleLinesAndLabels = (visible) => {
@@ -275,10 +275,10 @@ function MyThree() {
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: 0}, //Start
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.3, rotationZ: 0, positionX: -0.5, positionY: -0.5, positionZ: 0}, //Vorbereitung
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.8, rotationZ: 0, positionX: 2.5, positionY: 0, positionZ: -1.5}, //Schritt 1
-        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 0, positionY: -0.5, positionZ: -1.5}, //Schritt 2
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 0.75, positionY: -0.5, positionZ: -1.5}, //Schritt 2
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 2.3, rotationZ: 0, positionX: -0.5, positionY: 0, positionZ: -1.5}, //Schritt 3
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.5, rotationZ: 0, positionX: 0.75, positionY: -0.5, positionZ: -0.5},  //Schritt 4
-        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 2.5, positionY: -0.5, positionZ: -1.5},  //Schritt 5
+        { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.6, rotationZ: 0, positionX: 3, positionY: 0, positionZ: -1.25},  //Schritt 5
         { rotationX: Math.PI * 0.1, rotationY: Math.PI * 1.2, rotationZ: 0, positionX: 1, positionY: -1, positionZ: 0}, //Ende
       ];
 
