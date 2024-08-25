@@ -114,15 +114,15 @@ function MyThree() {
       const font = loader.parse(helvetikerFontJson);
   
         const geometry = new TextGeometry(text, {
-          font: font, // Ensure the font is loaded
+          font: font, 
           size: size,
           height: 0.05,
         });
         const material = new THREE.MeshBasicMaterial({ color });
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.copy(position);
-        scene.add(mesh); // Add label to the scene
-        linesAndLabelsRef.current.push(mesh); // Store the label for later manipulation
+        scene.add(mesh); 
+        linesAndLabelsRef.current.push(mesh); 
     };
 
     const addLinesAndLabels = () => {
@@ -130,7 +130,6 @@ function MyThree() {
 
       if (!model) return;
 
-      // Example coordinates - adjust these to match your model's specific points
       const yAxisStart = new THREE.Vector3(1.5, 0.9, 0);
       const yAxisEnd = new THREE.Vector3(1.5, 0.4, 0);
       const yAxisLine = createLine(yAxisStart, yAxisEnd);
@@ -178,6 +177,68 @@ function MyThree() {
         linesAndLabelsRef.current.forEach(obj => {
           obj.visible = visible;
       });
+    };
+
+    const createFireworks = () => {
+      const particleCount = 500; 
+      const particles = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+    
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3 + 0] = 0; 
+        positions[i * 3 + 1] = 0; 
+        positions[i * 3 + 2] = 0; 
+    
+        velocities[i * 3 + 0] = (Math.random() - 0.5) * 2; 
+        velocities[i * 3 + 1] = (Math.random() - 0.5) * 2; 
+        velocities[i * 3 + 2] = (Math.random() - 0.5) * 2; 
+
+        colors[i * 3 + 0] = Math.random(); 
+        colors[i * 3 + 1] = Math.random(); 
+        colors[i * 3 + 2] = Math.random(); 
+      }
+    
+      particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const particleMaterial = new THREE.PointsMaterial({
+        vertexColors: true,
+        size: 0.1,
+        transparent: true,
+        opacity: 1,
+      });
+    
+      const particleSystem = new THREE.Points(particles, particleMaterial);
+      scene.add(particleSystem);
+    
+      const duration = 1.5;
+      const animateParticles = () => {
+        const startTime = Date.now();
+    
+        const animate = () => {
+          const elapsedTime = (Date.now() - startTime) / 10000;
+    
+          for (let i = 0; i < particleCount; i++) {
+            positions[i * 3 + 0] += velocities[i * 3 + 0] * elapsedTime; 
+            positions[i * 3 + 1] += velocities[i * 3 + 1] * elapsedTime; 
+            positions[i * 3 + 2] += velocities[i * 3 + 2] * elapsedTime; 
+          }
+    
+          particles.attributes.position.needsUpdate = true;
+    
+          if (elapsedTime < duration) {
+            requestAnimationFrame(animate);
+          } else {
+            scene.remove(particleSystem); 
+          }
+        };
+    
+        animate();
+      };
+    
+      animateParticles();
     };
 
 
@@ -339,6 +400,10 @@ function MyThree() {
                 actionsRef.current[animation].stop();
               }
             });
+          }
+
+          if (currentSection === 7) {
+            createFireworks(); 
           }
         }
       };
